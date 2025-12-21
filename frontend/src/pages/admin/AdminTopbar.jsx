@@ -1,9 +1,9 @@
-import { LogOut, Menu } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/authSlice";
 import { useNavigate } from "react-router-dom";
 
-export default function AdminTopbar({ toggleSidebar }) {
+export default function AdminTopbar() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,21 +14,13 @@ export default function AdminTopbar({ toggleSidebar }) {
   };
 
   return (
-    <header className="w-full bg-white border-b border-orange-100 flex justify-between items-center px-8 py-3 shadow-sm">
-      <div className="flex items-center gap-4">
-        <button
-          onClick={toggleSidebar}
-          className="p-2 rounded-md hover:bg-orange-100 transition"
-        >
-          <Menu size={22} className="text-orange-600" />
-        </button>
-        <h2 className="text-lg font-semibold text-gray-800">Админ хянах самбар</h2>
-      </div>
-
+    <header className="w-full bg-white border-b border-orange-100 flex justify-end items-center px-8 py-3 shadow-sm">
       <div className="flex items-center gap-4">
         <div className="text-right hidden md:block">
-          <p className="font-semibold text-gray-800">{user?.name}</p>
-          <p className="text-sm text-gray-500">{user?.email}</p>
+          <p className="font-semibold text-gray-800">
+            {user ? `${user.ovog || ""} ${user.ner || ""}`.trim() : ""}
+          </p>
+          <p className="text-sm text-gray-500">{user?.mail}</p>
         </div>
         <button
           onClick={handleLogout}

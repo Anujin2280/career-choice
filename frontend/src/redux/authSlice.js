@@ -1,32 +1,67 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../api/axios";
 
-export const registerUser = createAsyncThunk("auth/register", async (userData, thunkAPI) => {
+const getStoredAuth = () => {
   try {
-    const res = await api.post("/auth/register", userData);
-    localStorage.setItem("token", res.data.token);
-    return res.data;
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data.message);
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    return { token, user };
+  } catch (error) {
+    return { token: null, user: null };
   }
-});
+};
 
-export const loginUser = createAsyncThunk("auth/loginUser", async (formData, thunkAPI) => {
-  try {
-    const res = await api.post("/api/auth/login", formData);
-    return res.data; // ⚡ { token, user: {..., role:"admin"} }
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data.message);
+const persistAuth = (data) => {
+  if (data?.token) {
+    localStorage.setItem("token", data.token);
   }
-});
- 
+  if (data?.user) {
+    localStorage.setItem("user", JSON.stringify(data.user));
+  }
+};
 
+const clearAuth = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+};
+
+export const registerUser = createAsyncThunk(
+  "auth/register",
+  async (userData, thunkAPI) => {
+    try {
+      const res = await api.post("/auth/register", userData);
+      persistAuth(res.data);
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || err.message
+      );
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (formData, thunkAPI) => {
+    try {
+      const res = await api.post("/auth/login", formData);
+      persistAuth(res.data);
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(
+        err.response?.data?.message || err.message
+      );
+    }
+  }
+);
+
+const storedAuth = getStoredAuth();
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null,
-    token: localStorage.getItem("token") || null,
+    user: storedAuth.user,
+    token: storedAuth.token,
     loading: false,
     error: null,
   },
@@ -34,7 +69,11 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
-      localStorage.removeItem("token");
+      clearAuth();
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+      localStorage.setItem("user", JSON.stringify(action.payload));
     },
   },
   extraReducers: (builder) => {
@@ -45,7 +84,7 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.token = action.payload.token;
       })
       .addCase(registerUser.rejected, (state, action) => {
@@ -58,7 +97,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -68,5 +107,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setUser } = authSlice.actions;
 export default authSlice.reducer;

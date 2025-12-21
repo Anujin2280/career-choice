@@ -4,7 +4,13 @@ import { registerUser } from "../redux/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({
+    ovog: "",
+    ner: "",
+    mail: "",
+    utas: "",
+    nuuts_ug: "",
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
@@ -16,69 +22,109 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center min-h-screen bg-white relative overflow-hidden">
+    <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-white relative overflow-hidden font-sans">
+      {/* Background Shapes (Арын чимэглэл дүрсүүд) */}
+      <div className="absolute -left-20 -top-20 w-96 h-96 rounded-full bg-orange-50/50 -z-10"></div>
+      <div className="absolute right-0 bottom-0 w-full h-[50%] bg-orange-50/30 rounded-t-full -z-10"></div>
 
-      {/* Зүүн тал */}
-      <div className="flex flex-col justify-center items-center w-full md:w-1/2 px-6 md:px-0">
-        <div className="bg-[#FBEFE6] p-10 rounded-2xl shadow-md w-full max-w-sm relative">
+      <div className="relative flex flex-col md:flex-row items-center justify-center w-full max-w-7xl px-6 gap-12">
+        {/* Register Card (Glassmorphism Effect) */}
+        <div className="relative w-full max-w-lg bg-[#F5D5B9]/70 backdrop-blur-md p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-white/40">
+          {/* Close Button (X) */}
           <button
             onClick={() => navigate("/")}
-            className="absolute top-4 right-5 text-white text-3xl font-extrabold hover:text-black transition-transform hover:scale-125"
+            className="absolute -top-3 -right-3 w-10 h-10 bg-[#E67E43] rounded-xl flex items-center justify-center text-white text-xl font-bold hover:bg-orange-600 transition-all hover:rotate-90 shadow-lg"
           >
-            X
+            ✕
           </button>
 
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Бүртгүүлэх</h2>
+          <h2 className="text-4xl font-black text-center text-slate-800 mb-8 tracking-tight">
+            Бүртгүүлэх
+          </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              placeholder="Нэр"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full bg-transparent border-b border-gray-400 py-2 focus:outline-none text-gray-700"
-            />
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <input
+                type="text"
+                placeholder="Овог"
+                value={form.ovog}
+                onChange={(e) => setForm({ ...form, ovog: e.target.value })}
+                className="w-full bg-transparent border-b-2 border-slate-400/50 py-2 focus:outline-none text-slate-800 placeholder:text-slate-500 transition-colors focus:border-[#E67E43]"
+              />
+              <input
+                type="text"
+                placeholder="Нэр"
+                value={form.ner}
+                onChange={(e) => setForm({ ...form, ner: e.target.value })}
+                className="w-full bg-transparent border-b-2 border-slate-400/50 py-2 focus:outline-none text-slate-800 placeholder:text-slate-500 transition-colors focus:border-[#E67E43]"
+              />
+            </div>
+
             <input
               type="email"
-              placeholder="Имэйл"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full bg-transparent border-b border-gray-400 py-2 focus:outline-none text-gray-700"
+              placeholder="И-мэйл"
+              value={form.mail}
+              onChange={(e) => setForm({ ...form, mail: e.target.value })}
+              className="w-full bg-transparent border-b-2 border-slate-400/50 py-2 focus:outline-none text-slate-800 placeholder:text-slate-500 transition-colors focus:border-[#E67E43]"
             />
+
+            <input
+              type="tel"
+              placeholder="Утасны дугаар"
+              value={form.utas}
+              onChange={(e) => setForm({ ...form, utas: e.target.value })}
+              className="w-full bg-transparent border-b-2 border-slate-400/50 py-2 focus:outline-none text-slate-800 placeholder:text-slate-500 transition-colors focus:border-[#E67E43]"
+            />
+
             <input
               type="password"
               placeholder="Нууц үг"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="w-full bg-transparent border-b border-gray-400 py-2 focus:outline-none text-gray-700"
+              value={form.nuuts_ug}
+              onChange={(e) => setForm({ ...form, nuuts_ug: e.target.value })}
+              className="w-full bg-transparent border-b-2 border-slate-400/50 py-2 focus:outline-none text-slate-800 placeholder:text-slate-500 transition-colors focus:border-[#E67E43]"
             />
+
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 rounded-md font-semibold transition"
+              className="w-full mt-4 bg-[#E67E43] hover:bg-orange-600 text-white py-4 rounded-2xl font-black text-lg transition-all shadow-lg shadow-orange-700/20 active:scale-95 disabled:opacity-70"
             >
               {loading ? "Бүртгэж байна..." : "Бүртгүүлэх"}
             </button>
-            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
+            {error && (
+              <p className="text-red-500 text-sm text-center font-bold">
+                {error}
+              </p>
+            )}
           </form>
 
-          <p className="text-center text-sm text-gray-700 mt-4">
+          <p className="text-center text-sm text-slate-800 mt-8 font-medium">
             Аль хэдийн бүртгэлтэй юу?{" "}
-            <Link to="/login" className="text-orange-600 font-semibold hover:underline">
+            <Link
+              to="/login"
+              className="text-[#E67E43] font-bold hover:underline ml-1"
+            >
               Нэвтрэх
             </Link>
           </p>
         </div>
-      </div>
 
-      {/* Баруун талын зураг */}
-      <div className="hidden md:flex w-1/2 justify-center items-center relative">
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full bg-orange-50 -z-10"></div>
-        <img
-          src="/career-hero.png"
-          alt="Career woman illustration"
-          className="max-w-[500px] md:max-w-[550px] object-contain relative z-10"
-        />
+        {/* Right Side Image Section */}
+        <div className="hidden md:flex flex-col items-center relative">
+          <img
+            src="/career-hero.png"
+            alt="Career Guidance"
+            className="max-w-md lg:max-w-lg object-contain relative z-10"
+          />
+          {/* Floating decorative icons (Зураг дээрх жижиг дүрсүүд) */}
+          <div className="absolute top-10 right-0 w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-bounce -z-10">
+            📝
+          </div>
+          <div className="absolute bottom-20 left-0 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center animate-pulse -z-10">
+            ✨
+          </div>
+        </div>
       </div>
     </div>
   );
