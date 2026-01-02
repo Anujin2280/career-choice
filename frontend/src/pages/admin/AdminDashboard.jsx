@@ -7,6 +7,8 @@ import DashboardCards from "./DashboardCards";
 import AdminUsersSection from "./AdminUsersSection";
 import AdminProfessionsSection from "./AdminProfessionsSection";
 import AdminQuestionsSection from "./AdminQuestionsSection";
+import AdminMbtiQuestionsSection from "./AdminMbtiQuestionsSection";
+import AdminMbtiTypesSection from "./AdminMbtiTypesSection";
 
 const getErrorMessage = (error, fallback) =>
   error?.response?.data?.message || fallback;
@@ -18,6 +20,8 @@ export default function AdminDashboard() {
     users: 0,
     professions: 0,
     questions: 0,
+    mbtiQuestions: 0,
+    mbtiTypes: 0,
   });
   const [loadingSummary, setLoadingSummary] = useState(false);
 
@@ -29,6 +33,8 @@ export default function AdminDashboard() {
         users: data?.users ?? 0,
         professions: data?.professions ?? 0,
         questions: data?.questions ?? 0,
+        mbtiQuestions: data?.mbtiQuestions ?? 0,
+        mbtiTypes: data?.mbtiTypes ?? 0,
       });
     } catch (error) {
       toast.error(
@@ -85,6 +91,20 @@ export default function AdminDashboard() {
           {active === "questions" && (
             <AdminQuestionsSection
               total={summary.questions}
+              onRefreshSummary={fetchSummary}
+            />
+          )}
+
+          {active === "mbti-questions" && (
+            <AdminMbtiQuestionsSection
+              total={summary.mbtiQuestions}
+              onRefreshSummary={fetchSummary}
+            />
+          )}
+
+          {active === "mbti-types" && (
+            <AdminMbtiTypesSection
+              total={summary.mbtiTypes}
               onRefreshSummary={fetchSummary}
             />
           )}

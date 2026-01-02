@@ -75,6 +75,9 @@ export default function Navbar() {
           <NavLink to={token ? "/test" : "/login"} className={navLinkClass}>
             RIASEC тест
           </NavLink>
+          <NavLink to={token ? "/mbti" : "/login"} className={navLinkClass}>
+            MBTI тест
+          </NavLink>
           <NavLink to="/about" className={navLinkClass}>
             Бидний тухай
           </NavLink>
@@ -200,6 +203,13 @@ export default function Navbar() {
               className={navLinkClass}
             >
               RIASEC тест
+            </NavLink>
+            <NavLink
+              to={token ? "/mbti" : "/login"}
+              onClick={() => setMobileOpen(false)}
+              className={navLinkClass}
+            >
+              MBTI тест
             </NavLink>
             <NavLink
               to="/about"

@@ -38,6 +38,7 @@ export default function Home() {
       setQuery={setQuery}
       results={results}
       testTo={token ? "/test" : "/login"}
+      mbtiTo={token ? "/mbti" : "/login"}
       onSelectProfession={handleSelect}
     />
   );

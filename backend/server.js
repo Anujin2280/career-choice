@@ -9,6 +9,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import professionRoutes from "./routes/professionRoutes.js";
 import testRoutes from "./routes/testRoutes.js";
+import mbtiRoutes from "./routes/mbtiRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
@@ -66,6 +67,7 @@ app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 app.use("/api/auth", authRoutes);
 app.use("/api/professions", professionRoutes);
 app.use("/api/test", testRoutes);
+app.use("/api/mbti", mbtiRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 

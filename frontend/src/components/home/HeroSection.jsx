@@ -7,6 +7,7 @@ export default function HeroSection({
   setQuery,
   results,
   testTo,
+  mbtiTo,
   onSelectProfession,
 }) {
   return (
@@ -38,13 +39,19 @@ export default function HeroSection({
             <div className="mt-10 flex flex-wrap gap-4 ">
               <Link
                 to={testTo || "/test"}
-                className="rounded-full bg-[#EA7A35] px-10 py-4 text-white font-bold shadow-lg shadow-orange-200 hover:bg-orange-600 transition-all hover:scale-105 active:scale-95"
+                className="rounded-full bg-[#EA7A35] px-10 py-2 text-white font-bold shadow-lg shadow-orange-200 hover:bg-orange-600 transition-all hover:scale-105 active:scale-95"
               >
                 Тест өгөх
               </Link>
               <Link
+                to={mbtiTo || "/mbti"}
+                className="rounded-full px-10 py-2 border-2 border-orange-200 text-orange-600 font-bold hover:bg-orange-50 transition-all"
+              >
+                MBTI тест
+              </Link>
+              <Link
                 to="/about"
-                className="rounded-full px-10 py-4 border-2 border-orange-200 text-orange-600 font-bold hover:bg-orange-50 transition-all"
+                className="rounded-full px-10 py-2 border-2 border-orange-200 text-orange-600 font-bold hover:bg-orange-50 transition-all"
               >
                 Дэлгэрэнгүй
               </Link>

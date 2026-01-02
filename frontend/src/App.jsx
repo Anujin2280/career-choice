@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Professions from "./pages/Professions";
 import ProfessionDetail from "./pages/ProfessionDetail";
 import Test from "./pages/Test";
+import MbtiTest from "./pages/MbtiTest";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
 import Saved from "./pages/Saved";
@@ -34,6 +35,14 @@ function AppLayout() {
           element={
             <ProtectedRoute>
               <Test />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/mbti"
+          element={
+            <ProtectedRoute>
+              <MbtiTest />
             </ProtectedRoute>
           }
         />

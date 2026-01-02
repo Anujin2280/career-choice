@@ -1,4 +1,4 @@
-import { Layers, ClipboardList, Users, Home, Menu } from "lucide-react";
+import { Layers, ClipboardList, Users, Home, Menu, Sparkles } from "lucide-react";
 
 export default function AdminSidebar({
   active,
@@ -10,6 +10,8 @@ export default function AdminSidebar({
     { id: "dashboard", name: "Хяналтын самбар", icon: Home },
     { id: "professions", name: "Мэргэжлүүд", icon: Layers },
     { id: "questions", name: "Асуултууд", icon: ClipboardList },
+    { id: "mbti-questions", name: "MBTI асуултууд", icon: ClipboardList },
+    { id: "mbti-types", name: "MBTI төрлүүд", icon: Sparkles },
     { id: "users", name: "Хэрэглэгчид", icon: Users },
   ];
 

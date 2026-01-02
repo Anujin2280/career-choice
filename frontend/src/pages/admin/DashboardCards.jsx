@@ -1,32 +1,46 @@
-import { Users, Layers, ClipboardList } from "lucide-react";
+import { Users, Layers, ClipboardList, Sparkles } from "lucide-react";
 
 export default function DashboardCards({ summary, onSelect }) {
   const cards = [
     {
       id: "users",
-      label: "Нийт хэрэглэгч",
+      label: "Хэрэглэгч",
       value: summary?.users ?? 0,
       icon: <Users size={30} />,
       color: "bg-orange-100 text-orange-600",
     },
     {
       id: "professions",
-      label: "Нийт мэргэжил",
+      label: "Мэргэжил",
       value: summary?.professions ?? 0,
       icon: <Layers size={30} />,
       color: "bg-green-100 text-green-600",
     },
     {
       id: "questions",
-      label: "Нийт асуулт",
+      label: "RIASEC асуулт",
       value: summary?.questions ?? 0,
       icon: <ClipboardList size={30} />,
       color: "bg-blue-100 text-blue-600",
     },
+    {
+      id: "mbti-questions",
+      label: "MBTI асуулт",
+      value: summary?.mbtiQuestions ?? 0,
+      icon: <ClipboardList size={30} />,
+      color: "bg-purple-100 text-purple-600",
+    },
+    {
+      id: "mbti-types",
+      label: "MBTI төрөл",
+      value: summary?.mbtiTypes ?? 0,
+      icon: <Sparkles size={30} />,
+      color: "bg-amber-100 text-amber-600",
+    },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
       {cards.map((card) => (
         <button
           key={card.id}
