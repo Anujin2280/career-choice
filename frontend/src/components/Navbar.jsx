@@ -72,11 +72,8 @@ export default function Navbar() {
           <NavLink to="/professions" className={navLinkClass}>
             Мэргэжлүүд
           </NavLink>
-          <NavLink to={token ? "/test" : "/login"} className={navLinkClass}>
-            RIASEC тест
-          </NavLink>
-          <NavLink to={token ? "/mbti" : "/login"} className={navLinkClass}>
-            MBTI тест
+          <NavLink to={token ? "/tests" : "/login"} className={navLinkClass}>
+            Тест өгөх
           </NavLink>
           <NavLink to="/about" className={navLinkClass}>
             Бидний тухай
@@ -198,18 +195,11 @@ export default function Navbar() {
               Мэргэжлүүд
             </NavLink>
             <NavLink
-              to={token ? "/test" : "/login"}
+              to={token ? "/tests" : "/login"}
               onClick={() => setMobileOpen(false)}
               className={navLinkClass}
             >
-              RIASEC тест
-            </NavLink>
-            <NavLink
-              to={token ? "/mbti" : "/login"}
-              onClick={() => setMobileOpen(false)}
-              className={navLinkClass}
-            >
-              MBTI тест
+              Тест өгөх
             </NavLink>
             <NavLink
               to="/about"

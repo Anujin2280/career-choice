@@ -259,7 +259,7 @@ function MbtiCard({ item }) {
 
 function EmptyState({ text }) {
   return (
-    <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border-2 border-dashed border-gray-100">
+    <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border-2 border-dashed border-orange-100">
       <SearchX size={48} className="text-gray-200 mb-4" />
       <p className="text-gray-400 font-medium">{text}</p>
     </div>

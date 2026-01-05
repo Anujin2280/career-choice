@@ -120,7 +120,7 @@ export default function ProfessionDetail() {
                   <Bookmark size={20} /> Хадгалах
                 </button>
                 <Link
-                  to={token ? "/test" : "/login"}
+                  to={token ? "/tests" : "/login"}
                   className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-gray-700 font-semibold border border-gray-200 hover:bg-gray-50 hover:text-orange-600 transition"
                 >
                   <CheckCircle2 size={20} /> Тест өгөх
@@ -274,7 +274,7 @@ export default function ProfessionDetail() {
                 зүйн тестээр шалгаарай.
               </p>
               <Link
-                to={token ? "/test" : "/login"}
+                to={token ? "/tests" : "/login"}
                 className="block w-full text-center py-3 bg-white text-orange-600 font-bold rounded-xl hover:bg-orange-50 transition"
               >
                 Тест өгөх

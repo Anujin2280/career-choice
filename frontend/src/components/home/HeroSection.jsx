@@ -6,8 +6,10 @@ export default function HeroSection({
   query,
   setQuery,
   results,
+  relatedResults,
+  relatedMain,
+  loading,
   testTo,
-  mbtiTo,
   onSelectProfession,
 }) {
   return (
@@ -38,16 +40,10 @@ export default function HeroSection({
 
             <div className="mt-10 flex flex-wrap gap-4 ">
               <Link
-                to={testTo || "/test"}
+                to={testTo || "/tests"}
                 className="rounded-full bg-[#EA7A35] px-10 py-2 text-white font-bold shadow-lg shadow-orange-200 hover:bg-orange-600 transition-all hover:scale-105 active:scale-95"
               >
                 Тест өгөх
-              </Link>
-              <Link
-                to={mbtiTo || "/mbti"}
-                className="rounded-full px-10 py-2 border-2 border-orange-200 text-orange-600 font-bold hover:bg-orange-50 transition-all"
-              >
-                MBTI тест
               </Link>
               <Link
                 to="/about"
@@ -58,13 +54,15 @@ export default function HeroSection({
             </div>
 
             <div className="mt-12">
-              <HeroSearch query={query} setQuery={setQuery} />
+              <HeroSearch query={query} setQuery={setQuery} loading={loading} />
             </div>
 
             <div className="mt-8">
               <SkillChips
                 query={query}
                 results={results}
+                relatedResults={relatedResults}
+                relatedMain={relatedMain}
                 onSelect={onSelectProfession}
               />
             </div>
